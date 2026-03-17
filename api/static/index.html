@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document-AI 手动识别控制台</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>Document-AI 手动识别控制台</h1>
+        <p>左侧选择识别区域，右侧生成并下载结果</p>
+      </header>
+
+      <main class="panes">
+        <section class="pane">
+          <div class="card">
+            <h2>上传与预览</h2>
+            <div class="row">
+              <input type="file" id="fileInput" accept=".pdf" />
+              <input type="number" id="maxPages" min="1" max="50" value="5" />
+              <button id="uploadBtn" class="accent">生成预览</button>
+            </div>
+            <div class="status">预览页数默认 5，可自行调整</div>
+          </div>
+
+          <div class="card">
+            <div class="row">
+              <span class="tag">识别选择</span>
+              <select id="pageSelect"></select>
+              <button id="selectAll" class="secondary">全选</button>
+              <button id="selectNone" class="secondary">全不选</button>
+              <button id="dragSelect" class="secondary">框选</button>
+              <button id="dragDeselect" class="secondary">反选</button>
+            </div>
+            <div id="pageList" class="page-list"></div>
+            <div class="canvas-wrap" style="margin-top: 12px;">
+              <canvas id="pageCanvas"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <section class="pane">
+          <div class="card">
+            <h2>生成结果</h2>
+            <div class="row">
+              <button id="generateBtn" class="accent">生成 DOCX</button>
+              <a id="downloadLink" class="download" href="#" style="display:none;">下载结果</a>
+            </div>
+            <div id="status" class="status"></div>
+          </div>
+
+          <div class="card">
+            <h2>右侧编辑</h2>
+            <div class="editor-grid">
+              <div class="editor-block">
+                <div class="editor-title">文字调整</div>
+                <div id="activeTextMeta" class="status">点击左侧文字块以编辑</div>
+                <textarea id="textEditor" rows="6" placeholder="修改选中文本内容"></textarea>
+                <div class="row" style="margin-top: 8px;">
+                  <button id="saveTextBtn" class="secondary">保存修改</button>
+                  <button id="clearTextBtn" class="secondary">清除修改</button>
+                </div>
+              </div>
+              <div class="editor-divider"></div>
+              <div class="editor-block">
+                <div class="editor-title">图标替换</div>
+                <input type="file" id="replaceImageInput" accept="image/*" />
+                <div class="row" style="margin-top: 8px;">
+                  <button id="replaceModeBtn" class="secondary">替换图标模式</button>
+                  <button id="clearReplacementsBtn" class="secondary">清空当前页</button>
+                </div>
+                <div id="replaceList" class="replace-list"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="result-preview">
+              <div class="result-image-wrap">
+                <img id="resultImage" alt="结果预览" />
+              </div>
+              <div id="resultThumbs" class="thumbs"></div>
+            </div>
+            <div id="resultHint" class="preview-box">生成文件预览会显示在这里</div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

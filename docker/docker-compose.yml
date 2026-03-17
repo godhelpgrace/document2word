@@ -1,0 +1,53 @@
+
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - STORAGE_BASE_DIR=/app/storage_data
+      - UPLOAD_DIR=/app/storage_data/uploads
+      - RESULT_DIR=/app/storage_data/results
+    volumes:
+      - storage_data:/app/storage_data
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+  worker:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - STORAGE_BASE_DIR=/app/storage_data
+      - UPLOAD_DIR=/app/storage_data/uploads
+      - RESULT_DIR=/app/storage_data/results
+    volumes:
+      - storage_data:/app/storage_data
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: celery -A workers.celery_app worker --loglevel=info --concurrency=2
+
+volumes:
+  redis_data:
+  storage_data:
