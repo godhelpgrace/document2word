@@ -58,6 +58,14 @@ curl http://localhost:8000/api/v1/tasks/{task_id}
 curl -O http://localhost:8000/api/v1/tasks/{task_id}/download
 ```
 
+### Web 服务（内置 UI）
+
+```bash
+uvicorn api.main:app --reload --port 8000
+```
+
+访问 http://localhost:8000 查看 Web 界面。
+
 ### Docker 部署
 
 ```bash
