@@ -1,0 +1,3 @@
+name = "document2word"
+compatibility_date = "2026-03-18"
+pages_build_output_dir = "api/static"
