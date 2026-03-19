@@ -51,6 +51,22 @@ def index():
         return FileResponse(index_path)
     return {"message": "UI not found"}
 
+
+@app.get("/styles.css", include_in_schema=False)
+def styles():
+    css_path = STATIC_DIR / "styles.css"
+    if css_path.exists():
+        return FileResponse(css_path)
+    return {"message": "styles.css not found"}
+
+
+@app.get("/app.js", include_in_schema=False)
+def app_js():
+    js_path = STATIC_DIR / "app.js"
+    if js_path.exists():
+        return FileResponse(js_path)
+    return {"message": "app.js not found"}
+
 # CORS
 app.add_middleware(
     CORSMiddleware,

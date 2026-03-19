@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document-AI 手动识别控制台</title>
-    <link rel="stylesheet" href="/static/styles.css" />
+    <title>document2word 转换台</title>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="app">
       <header>
-        <h1>Document-AI 手动识别控制台</h1>
-        <p>左侧选择识别区域，右侧生成并下载结果</p>
+        <h1>document2word 转换台</h1>
+        <p>上传 PDF，选择识别区域，一键生成可编辑 Word</p>
       </header>
 
       <main class="panes">
@@ -52,7 +52,7 @@
           </div>
 
           <div class="card">
-            <h2>右侧编辑</h2>
+            <h2>结果调整</h2>
             <div class="editor-grid">
               <div class="editor-block">
                 <div class="editor-title">文字调整</div>
@@ -65,10 +65,10 @@
               </div>
               <div class="editor-divider"></div>
               <div class="editor-block">
-                <div class="editor-title">图标替换</div>
+                <div class="editor-title">图像替换</div>
                 <input type="file" id="replaceImageInput" accept="image/*" />
                 <div class="row" style="margin-top: 8px;">
-                  <button id="replaceModeBtn" class="secondary">替换图标模式</button>
+                  <button id="replaceModeBtn" class="secondary">替换图像模式</button>
                   <button id="clearReplacementsBtn" class="secondary">清空当前页</button>
                 </div>
                 <div id="replaceList" class="replace-list"></div>
@@ -89,6 +89,6 @@
       </main>
     </div>
 
-    <script src="/static/app.js"></script>
+    <script src="./app.js"></script>
   </body>
 </html>

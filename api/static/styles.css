@@ -1,13 +1,15 @@
 @charset "UTF-8";
 
 :root {
-  --bg: #f6f4ef;
-  --ink: #1f2a2e;
-  --muted: #6d7b83;
-  --accent: #2aa36b;
-  --accent-2: #1c7aa8;
+  --bg: #f5f7fb;
+  --ink: #1d2433;
+  --muted: #5e6b7a;
+  --accent: #2b8a3e;
+  --accent-2: #2f6fed;
   --card: #ffffff;
-  --stroke: #e1e6e2;
+  --stroke: #e5e9f2;
+  --shadow: 0 18px 40px rgba(24, 32, 56, 0.08);
+  --radius: 16px;
 }
 
 * {
@@ -16,9 +18,9 @@
 
 body {
   margin: 0;
-  font-family: "Avenir Next", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Inter", "Avenir Next", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
   color: var(--ink);
-  background: radial-gradient(circle at 20% 0%, #edf9f0 0%, #f6f4ef 55%, #f2f6fb 100%);
+  background: linear-gradient(180deg, #f7f9ff 0%, #eef2f8 100%);
 }
 
 .app {
@@ -28,28 +30,31 @@ body {
 }
 
 header {
-  padding: 20px 28px;
+  padding: 28px 28px 22px;
   border-bottom: 1px solid var(--stroke);
-  background: linear-gradient(120deg, #ffffff 0%, #f1f9f5 50%, #eef6fb 100%);
+  background: #ffffff;
 }
 
 header h1 {
   margin: 0;
-  font-size: 20px;
-  letter-spacing: 0.5px;
+  font-size: 22px;
+  letter-spacing: 0.3px;
 }
 
 header p {
   margin: 6px 0 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .panes {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: 18px;
-  padding: 18px 22px 28px;
+  gap: 20px;
+  padding: 20px 24px 32px;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .pane {
@@ -61,14 +66,14 @@ header p {
 .card {
   background: var(--card);
   border: 1px solid var(--stroke);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 10px 30px rgba(31, 42, 46, 0.05);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
 }
 
 .card h2 {
   margin: 0 0 12px;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 0.3px;
 }
 
@@ -82,25 +87,31 @@ header p {
 input[type="file"] {
   padding: 8px;
   border: 1px dashed var(--stroke);
-  border-radius: 10px;
-  background: #fafcfa;
+  border-radius: 12px;
+  background: #f9fbff;
 }
 
 input[type="number"] {
   padding: 8px 10px;
   border: 1px solid var(--stroke);
-  border-radius: 10px;
+  border-radius: 12px;
   width: 120px;
 }
 
 button {
-  padding: 9px 14px;
-  border-radius: 10px;
+  padding: 10px 16px;
+  border-radius: 12px;
   border: none;
   background: var(--ink);
   color: white;
   font-weight: 600;
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(20, 32, 56, 0.12);
 }
 
 button.secondary {
@@ -110,9 +121,9 @@ button.secondary {
 }
 
 button.secondary.active {
-  background: #eef6f2;
-  border-color: var(--accent);
-  color: #1e6146;
+  background: #eef5ff;
+  border-color: var(--accent-2);
+  color: #1f3fa3;
 }
 
 button.accent {
@@ -122,7 +133,7 @@ button.accent {
 select {
   padding: 8px 10px;
   border: 1px solid var(--stroke);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .page-list {
@@ -136,7 +147,7 @@ select {
   padding: 4px 8px;
   border-radius: 999px;
   border: 1px solid var(--stroke);
-  background: #f7f9f7;
+  background: #f3f6fb;
   font-size: 12px;
   cursor: pointer;
 }
@@ -151,7 +162,7 @@ select {
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--stroke);
-  background: #f9faf9;
+  background: #f8f9fe;
 }
 
 canvas {
@@ -177,8 +188,8 @@ canvas {
   display: inline-block;
   padding: 3px 8px;
   border-radius: 999px;
-  background: #eef6f2;
-  color: #2b6b4c;
+  background: #eef5ff;
+  color: #2d3f86;
   font-size: 11px;
 }
 
@@ -186,7 +197,7 @@ canvas {
   min-height: 120px;
   border: 1px dashed var(--stroke);
   border-radius: 12px;
-  background: #fbfbfb;
+  background: #f7f8fd;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,6 +209,46 @@ canvas {
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
+}
+
+textarea,
+select,
+input[type="number"],
+input[type="file"] {
+  outline: none;
+}
+
+textarea:focus,
+select:focus,
+input[type="number"]:focus,
+input[type="file"]:focus {
+  border-color: rgba(47, 111, 237, 0.4);
+  box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.15);
+}
+
+@media (max-width: 1080px) {
+  .panes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  header {
+    padding: 22px 18px;
+  }
+
+  .panes {
+    padding: 16px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input[type="number"] {
+    width: 100%;
+  }
 }
 
 .editor-title {

@@ -73,6 +73,30 @@ cd docker
 docker-compose up -d
 ```
 
+## Cloudflare 部署
+
+Cloudflare Pages 仅支持静态资源与 Pages Functions，无法直接运行 FastAPI + Uvicorn。
+
+### 方案 A：Pages 仅托管前端静态页面
+
+将 UI 静态文件部署到 Pages，API 后端单独部署到可运行 Python 的环境（容器、云主机等）。
+
+```bash
+uvicorn api.main:app --host 0.0.0.0 --port 8080
+```
+
+### 方案 B：Cloudflare Tunnel 暴露后端
+
+本地或容器运行后端后，通过 tunnel 暴露到公网，适合临时或内网服务共享。
+
+```bash
+cloudflared tunnel --url http://localhost:8000
+```
+
+### 方案 C：重写为 Cloudflare Functions/Workers
+
+将 API 逻辑迁移为 Functions/Workers（JS/TS），由 Pages/Workers 直接托管。
+
 ## 项目结构
 
 ```
